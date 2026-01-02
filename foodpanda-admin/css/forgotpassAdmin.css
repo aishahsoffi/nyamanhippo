@@ -1,0 +1,255 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #ebc1d8 0%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.forgot-wrapper {
+    width: 900px;
+    height: 500px;
+    display: flex;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(255, 15, 167, 0.5);
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* LEFT SIDE */
+.forgot-left {
+    width: 40%;
+    background: linear-gradient(135deg, #e11d74 0%, #d70f64 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.logo {
+    max-width: 180%;
+    max-height: 180px;;
+    background: #e11d74;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    object-fit: contain;
+}
+
+.forgot-left h2 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* RIGHT SIDE */
+.forgot-right {
+    width: 60%;
+    padding: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    background: #e11d74;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.forgot-right h1 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 2rem;
+    color: #e11d74;
+}
+
+.subtitle {
+    color: #e11d74;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 25px;
+}
+
+input[type="email"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 2px solid #ebc1d8;
+    margin-bottom: 5px;
+    background: #fce9f3;
+    color: #e11d74;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+input[type="email"]:focus {
+    outline: none;
+    border-color: #e11d74;
+    background: #ffffff;
+}
+
+input[type="email"]::placeholder {
+    color: #ebc1d8;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.85rem;
+    display: none;
+    margin-top: 5px;
+}
+
+/* BUTTON */
+.reset-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #e11d74 0%, #d70f64 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.reset-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225, 29, 116, 0.4);
+}
+
+.reset-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Message Box */
+.message-box {
+    padding: 12px 16px;
+    color: white;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.error-box {
+    background: #ef4444;
+}
+
+.success-box {
+    background: #10b981;
+}
+
+/* Back to Login */
+.back-to-login {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.back-to-login a {
+    color: #e11d74;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.back-to-login a:hover {
+    opacity: 0.8;
+}
+
+/* Info Box */
+.info-box {
+    padding: 15px;
+    background: #fce9f3;
+    border-radius: 8px;
+    border-left: 4px solid #e11d74;
+}
+
+.info-box p {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #e11d74;
+    line-height: 1.5;
+}
+
+.info-box strong {
+    color: #e11d74;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .forgot-wrapper {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .forgot-left,
+    .forgot-right {
+        width: 100%;
+    }
+
+    .forgot-left {
+        padding: 30px;
+    }
+
+    .logo-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .forgot-right {
+        padding: 30px;
+    }
+
+    .forgot-left h2 {
+        font-size: 1.5rem;
+    }
+
+    .forgot-right h1 {
+        font-size: 1.6rem;
+    }
+}

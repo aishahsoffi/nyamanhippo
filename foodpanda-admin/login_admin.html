@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Foodpanda</title>
+    <link rel="stylesheet" href="css/login_admin.css">
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <!-- LEFT PANEL -->
+    <div class="login-left">
+        <div class="logo-container">
+            <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="logo">
+        </div>
+        <h2>Admin Control Center</h2>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="login-right">
+        <span class="badge">🔒 ADMIN ACCESS ONLY</span>
+
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to access the admin dashboard</p>
+
+        <!-- Error box for displaying PHP errors -->
+        <div class="error-box" id="errorBox" style="display: none;"></div>
+
+        <!-- Form submits to PHP file -->
+        <form action="login_admin.php" method="POST" id="loginForm">
+            <div class="input-group">
+                <input type="email" name="email" id="email" placeholder="Admin Email" required>
+                <span class="error-message" id="emailError"></span>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <span class="error-message" id="passwordError"></span>
+            </div>
+
+            <div class="options">
+                <label class="remember">
+                    <input type="checkbox" name="remember" id="remember">
+                    Remember me for 10 days
+                </label>
+                <a href="forgotpassAdmin.html" class="forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                Sign in to Dashboard
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    // Display error messages from PHP URL parameters
+    window.addEventListener('load', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const errorBox = document.getElementById('errorBox');
+
+        if (error) {
+            let errorMessage = '';
+            
+            switch(error) {
+                case 'empty':
+                    errorMessage = 'Please fill in all fields';
+                    break;
+                case 'invalid_email':
+                    errorMessage = 'Please enter a valid email address';
+                    break;
+                case 'account_not_exist':
+                    errorMessage = 'Account does not exist. Please check your email.';
+                    break;
+                case 'wrong_password':
+                    errorMessage = 'Incorrect password. Please try again.';
+                    break;
+                case 'database':
+                    errorMessage = 'Database connection error. Please try again later.';
+                    break;
+                default:
+                    errorMessage = 'An error occurred. Please try again.';
+            }
+            
+            errorBox.textContent = errorMessage;
+            errorBox.style.display = 'block';
+        }
+
+        // Pre-fill email if it was passed back from PHP
+        const email = urlParams.get('email');
+        if (email) {
+            document.getElementById('email').value = decodeURIComponent(email);
+        }
+    });
+
+    // Client-side validation (optional, before PHP)
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const errorBox = document.getElementById('errorBox');
+
+        // Clear previous errors
+        errorBox.style.display = 'none';
+        document.getElementById('emailError').style.display = 'none';
+        document.getElementById('passwordError').style.display = 'none';
+
+        // Basic validation
+        if (!email || !password) {
+            e.preventDefault();
+            errorBox.textContent = 'Please fill in all fields';
+            errorBox.style.display = 'block';
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            e.preventDefault();
+            document.getElementById('emailError').textContent = 'Please enter a valid email address';
+            document.getElementById('emailError').style.display = 'block';
+            return;
+        }
+
+        if (password.length < 6) {
+            e.preventDefault();
+            document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+            document.getElementById('passwordError').style.display = 'block';
+            return;
+        }
+
+        // If validation passes, form will submit to PHP
+    });
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Clear errors when typing
+    document.getElementById('email').addEventListener('input', function() {
+        document.getElementById('emailError').style.display = 'none';
+        document.getElementById('errorBox').style.display = 'none';
+    });
+
+    document.getElementById('password').addEventListener('input', function() {
+        document.getElementById('passwordError').style.display = 'none';
+        document.getElementById('errorBox').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

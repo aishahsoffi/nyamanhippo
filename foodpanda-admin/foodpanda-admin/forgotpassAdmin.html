@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Admin</title>
+    <link rel="stylesheet" href="css/forgotpassAdmin.css">
+</head>
+<body>
+
+<div class="forgot-wrapper">
+    
+    <!-- LEFT PANEL -->
+    <div class="forgot-left">
+        <div class="logo-container">
+            <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="logo">
+        </div>
+        <h2>Admin Control Center</h2>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="forgot-right">
+        <span class="badge">🔒 ADMIN ACCESS ONLY</span>
+
+        <h1>Forgot Password?</h1>
+        <p class="subtitle">Enter your email address and we'll send you a reset link</p>
+
+        <form id="forgotForm">
+            <div class="input-group">
+                <input type="email" id="email" name="email" placeholder="Admin Email" required>
+                <span class="error-message" id="emailError"></span>
+            </div>
+
+            <button type="submit" class="reset-btn" id="resetBtn">
+                <span id="btnText">Send Reset Link</span>
+                <span id="btnLoader" class="loader" style="display: none;"></span>
+            </button>
+
+            <div class="message-box" id="messageBox" style="display: none;"></div>
+        </form>
+
+        <div class="back-to-login">
+            <a href="login_admin.html">← Back to Login</a>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <p><strong>📧 Note:</strong></p>
+            <p>If the email exists in our system, you will receive a password reset link within 5 minutes.</p>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const forgotForm = document.getElementById('forgotForm');
+        const emailInput = document.getElementById('email');
+        const resetBtn = document.getElementById('resetBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+        const messageBox = document.getElementById('messageBox');
+
+        forgotForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Clear previous messages
+            clearMessages();
+
+            // Get email value
+            const email = emailInput.value.trim();
+
+            // Validate email
+            if (!validateEmail(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+
+            // Show loading state
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'inline-block';
+            resetBtn.disabled = true;
+
+            // Simulate sending email (2 second delay)
+            setTimeout(() => {
+                // In production, this would be an API call
+                showSuccess('Password reset link has been sent to your email!');
+                resetButton();
+                emailInput.value = '';
+
+                // Redirect back to login after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'login_admin.html';
+                }, 3000);
+            }, 2000);
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showError(message) {
+            document.getElementById('emailError').textContent = message;
+            document.getElementById('emailError').style.display = 'block';
+        }
+
+        function showSuccess(message) {
+            messageBox.textContent = message;
+            messageBox.style.backgroundColor = '#10b981';
+            messageBox.style.display = 'block';
+        }
+
+        function clearMessages() {
+            document.getElementById('emailError').style.display = 'none';
+            messageBox.style.display = 'none';
+        }
+
+        function resetButton() {
+            btnText.style.display = 'inline';
+            btnLoader.style.display = 'none';
+            resetBtn.disabled = false;
+        }
+
+        // Clear error when user starts typing
+        emailInput.addEventListener('input', () => {
+            document.getElementById('emailError').style.display = 'none';
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Admin Panel</title>
+  <link rel="stylesheet" href="css/settings_admin.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="admin-header">
+        <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="panda-logo">
+        <span class="admin-title">Admin Panel</span>
+      </div>
+      <nav class="nav-menu">
+        <div class="nav-item" onclick="navigateTo('adminDashboard')">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('manageProduct')">
+          <span class="nav-icon">🍔</span>
+          <span>Manage Products</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('viewMembers')">
+          <span class="nav-icon">👥</span>
+          <span>View Members</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('orders')">
+          <span class="nav-icon">📦</span>
+          <span>Orders</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('report_admin')">
+          <span class="nav-icon">📈</span>
+          <span>Reports</span>
+        </div>
+        <div class="nav-item active" onclick="navigateTo('settings_admin')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </div>
+        <div class="nav-item logout" onclick="navigateTo('logout_admin')">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1>Settings</h1>
+          <div class="breadcrumb">Admin / Settings</div>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div id="messageBox" style="display: none;"></div>
+
+        <!-- Account Settings -->
+        <div class="settings-section">
+          <h2>Account Settings</h2>
+          <div class="account-info">
+            <p><strong>Current Admin:</strong> <span id="currentAdminName">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="currentAdminEmail">Loading...</span></p>
+          </div>
+          
+          <form id="accountSettingsForm">
+            <div class="settings-grid">
+              <div class="setting-item">
+                <label>Admin Name</label>
+                <input type="text" id="adminName" placeholder="Enter your name" required>
+              </div>
+              <div class="setting-item">
+                <label>Email Address</label>
+                <input type="email" id="adminEmail" placeholder="Enter your email" required>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Change Password Section -->
+        <div class="settings-section">
+          <h2>Change Password</h2>
+          <form id="passwordForm">
+            <div class="settings-grid">
+              <div class="setting-item">
+                <label>Current Password</label>
+                <input type="password" id="currentPassword" placeholder="Enter current password" required>
+              </div>
+              <div class="setting-item">
+                <label>New Password</label>
+                <input type="password" id="newPassword" placeholder="Enter new password" required minlength="6">
+                <small style="color: #9ca3af; margin-top: 0.3rem; display: block;">Minimum 6 characters</small>
+              </div>
+              <div class="setting-item">
+                <label>Confirm New Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm new password" required minlength="6">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="settings-section">
+          <h2>Notification Preferences</h2>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" id="emailOrders" checked>
+              <span>Email notifications for new orders</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="smsUrgent" checked>
+              <span>SMS notifications for urgent orders</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="weeklyReport">
+              <span>Weekly sales report email</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="lowStock" checked>
+              <span>Low stock alerts</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn btn-primary" onclick="saveAllSettings()">Save All Changes</button>
+          <button class="btn btn-secondary" onclick="cancelChanges()">Cancel</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/settings_admin.js"></script>
+</body>
+</html>

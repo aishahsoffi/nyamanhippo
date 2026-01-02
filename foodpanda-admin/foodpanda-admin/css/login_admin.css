@@ -1,0 +1,265 @@
+* * {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #ebc1d8 0%, #ffffff 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.login-wrapper {
+    width: 900px;
+    height: 550px;
+    display: flex;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(255, 15, 167, 0.5);
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* LEFT SIDE */
+.login-left {
+    width: 40%;
+    background: linear-gradient(135deg, #e11d74 0%, #d70f64 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.logo {
+    max-width: 180%;
+    max-height: 180px;;
+    background: #e11d74;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    object-fit: contain;
+}
+
+.login-left h2 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* RIGHT SIDE */
+.login-right {
+    width: 60%;
+    padding: 50px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.login-right::-webkit-scrollbar {
+    width: 8px;
+}
+
+.login-right::-webkit-scrollbar-track {
+    background: #e11d74;
+    border-radius: 10px;
+}
+
+.login-right::-webkit-scrollbar-thumb {
+    background: #e11d74;
+    border-radius: 10px;
+}
+
+.badge {
+    background: #e11d74;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.login-right h1 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 2rem;
+    color: #e11d74;
+}
+
+.subtitle {
+    color: #e11d74;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 2px solid #ebc1d8;
+    margin-bottom: 5px;
+    background: #fce9f3;
+    color: #e11d74;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #e11d74;
+    background: #ffffff;
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: #ebc1d8;
+}
+
+.error-message {
+    color: #ef4444;
+    font-size: 0.85rem;
+    display: none;
+    margin-top: 5px;
+}
+
+/* REMEMBER + FORGOT */
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #e11d74;
+}
+
+.remember input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #e11d74;
+}
+
+.forgot {
+    color: #e11d74;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.forgot:hover {
+    opacity: 0.8;
+}
+
+/* BUTTON */
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #e11d74 0%, #d70f64 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.login-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225, 29, 116, 0.4);
+}
+
+.login-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Error Box */
+.error-box {
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: #ef4444;
+    color: white;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .login-wrapper {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .login-left,
+    .login-right {
+        width: 100%;
+    }
+
+    .login-left {
+        padding: 30px;
+    }
+
+    .logo-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    .login-right {
+        padding: 30px;
+    }
+
+    .login-left h2 {
+        font-size: 1.5rem;
+    }
+
+    .login-right h1 {
+        font-size: 1.6rem;
+    }
+}

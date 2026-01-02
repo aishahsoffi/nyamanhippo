@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Products (Admin)</title>
+  <link rel="stylesheet" href="css/manageProduct.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="admin-header">
+        <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="panda-logo">
+        <span class="admin-title">Admin Panel</span>
+      </div>
+      <nav class="nav-menu">
+        <div class="nav-item" onclick="navigateTo('adminDashboard')">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item active" onclick="navigateTo('manageProduct')">
+          <span class="nav-icon">🍔</span>
+          <span>Manage Products</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('viewMembers')">
+          <span class="nav-icon">👥</span>
+          <span>View Members</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('orders')">
+          <span class="nav-icon">📦</span>
+          <span>Orders</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('report_admin')">
+          <span class="nav-icon">📈</span>
+          <span>Reports</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('settings_admin')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </div>
+        <div class="nav-item logout" onclick="navigateTo('logout_admin')">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1>Manage Products</h1>
+          <div class="breadcrumb">Admin / Products / Manage Products</div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="action-bar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search products by name or category..." onkeyup="filterProducts()">
+          </div>
+          <button class="btn btn-primary" onclick="openAddModal()">+ Add New Product</button>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+          <h2>Filter Products</h2>
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label>Category</label>
+              <select id="categoryFilter" onchange="filterProducts()">
+                <option value="all">All Categories</option>
+                <option value="burgers">Burgers</option>
+                <option value="pizza">Pizza</option>
+                <option value="chicken">Chicken</option>
+                <option value="desserts">Desserts</option>
+                <option value="beverages">Beverages</option>
+                <option value="sides">Sides</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Status</label>
+              <select id="statusFilter" onchange="filterProducts()">
+                <option value="all">All Status</option>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Price Range</label>
+              <select id="priceFilter" onchange="filterProducts()">
+                <option value="all">All Prices</option>
+                <option value="0-20">RM 0 - 20</option>
+                <option value="20-50">RM 20 - 50</option>
+                <option value="50+">RM 50+</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label>Sort By</label>
+              <select id="sortFilter" onchange="filterProducts()">
+                <option value="name-asc">Name (A-Z)</option>
+                <option value="name-desc">Name (Z-A)</option>
+                <option value="price-asc">Price (Low to High)</option>
+                <option value="price-desc">Price (High to Low)</option>
+                <option value="stock-asc">Stock (Low to High)</option>
+                <option value="stock-desc">Stock (High to Low)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="totalProducts">0</div>
+            <div class="stat-label">Total Products</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="availableProducts">0</div>
+            <div class="stat-label">Available</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="lowStockProducts">0</div>
+            <div class="stat-label">Low Stock</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="totalCategories">0</div>
+            <div class="stat-label">Categories</div>
+          </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="products-table-section">
+          <h2>Product List</h2>
+          <table id="productsTable">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <!-- Products will be dynamically loaded here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <div id="productModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add New Product</h2>
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+      </div>
+      <form id="productForm" onsubmit="saveProduct(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Product Name *</label>
+            <input type="text" id="productName" required>
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="productCategory" required>
+              <option value="">Select Category</option>
+              <option value="burgers">Burgers</option>
+              <option value="pizza">Pizza</option>
+              <option value="chicken">Chicken</option>
+              <option value="desserts">Desserts</option>
+              <option value="beverages">Beverages</option>
+              <option value="sides">Sides</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Price (RM) *</label>
+            <input type="number" id="productPrice" step="0.01" min="0" required>
+          </div>
+          <div class="form-group">
+            <label>Stock Quantity *</label>
+            <input type="number" id="productStock" min="0" required>
+          </div>
+          <div class="form-group full-width">
+            <label>Description</label>
+            <textarea id="productDescription" rows="3"></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Image URL</label>
+            <input type="text" id="productImage" placeholder="https://example.com/image.jpg">
+          </div>
+          <div class="form-group">
+            <label>Status *</label>
+            <select id="productStatus" required>
+              <option value="available">Available</option>
+              <option value="unavailable">Unavailable</option>
+            </select>
+          </div>
+        </div>
+        <input type="hidden" id="productId">
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/manageProduct.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="css/adminDashboard.css">
+  <!-- Flatpickr CSS for Calendar Widget -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="admin-header">
+        <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="panda-logo">
+        <span class="admin-title">Admin Panel</span>
+      </div>
+      <nav class="nav-menu">
+        <div class="nav-item active" onclick="navigateTo('adminDashboard')">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('manageProduct')">
+          <span class="nav-icon">🍔</span>
+          <span>Manage Products</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('viewMembers')">
+          <span class="nav-icon">👥</span>
+          <span>View Members</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('orders')">
+          <span class="nav-icon">📦</span>
+          <span>Orders</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('report_admin')">
+          <span class="nav-icon">📈</span>
+          <span>Reports</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('settings_admin')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </div>
+        <div class="nav-item logout" onclick="navigateTo('logout_admin')">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <h1>Dashboard Overview</h1>
+        <div class="admin-profile">
+          <div class="admin-info">
+            <div class="admin-name">Loading...</div>
+            <div class="admin-email">Loading...</div>
+          </div>
+          <div class="profile-icon">👤</div>
+        </div>
+      </div>
+
+      <div class="content-wrapper">
+        <!-- Filter Section -->
+        <div class="filter-section">
+          <h2>📅 Dashboard Filters</h2>
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="timeFilter">Time Period</label>
+              <select id="timeFilter" onchange="handleTimeFilterChange()">
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="this_week" selected>This Week</option>
+                <option value="last_week">Last Week</option>
+                <option value="this_month">This Month</option>
+                <option value="last_month">Last Month</option>
+                <option value="this_year">This Year</option>
+                <option value="custom">Custom Range</option>
+              </select>
+            </div>
+            
+            <!-- Calendar Widget for Date Selection -->
+            <div class="filter-group" id="dateRangeGroup" style="display: none;">
+              <label for="dateRange">📆 Select Date Range</label>
+              <input type="text" id="dateRange" placeholder="Click to select dates" readonly>
+            </div>
+
+            <div class="filter-group">
+              <label for="orderStatus">Order Status</label>
+              <select id="orderStatus">
+                <option value="all">All Orders</option>
+                <option value="completed">Completed Only</option>
+                <option value="pending">Pending Only</option>
+                <option value="processing">Processing Only</option>
+              </select>
+            </div>
+            
+            <div class="filter-actions-inline">
+              <button class="btn btn-primary" onclick="applyDashboardFilters()">
+                <span>🔍</span> Apply Filters
+              </button>
+              <button class="btn btn-secondary" onclick="resetDashboardFilters()">
+                <span>🔄</span> Reset
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card stat-revenue">
+            <div class="stat-icon">💰</div>
+            <div class="stat-content">
+              <div class="stat-value" id="totalRevenue">RM 0</div>
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-change positive" id="revenueChange">↑ 0% from last period</div>
+            </div>
+          </div>
+          <div class="stat-card stat-orders">
+            <div class="stat-icon">📦</div>
+            <div class="stat-content">
+              <div class="stat-value" id="totalOrders">0</div>
+              <div class="stat-label">Total Orders</div>
+              <div class="stat-change positive" id="ordersChange">↑ 0% from last period</div>
+            </div>
+          </div>
+          <div class="stat-card stat-members">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+              <div class="stat-value" id="activeMembers">0</div>
+              <div class="stat-label">Active Members</div>
+              <div class="stat-change positive" id="membersChange">↑ 0% from last period</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sales Chart -->
+        <div class="chart-section">
+          <div class="chart-header">
+            <h2>📊 Sales Overview</h2>
+            <div class="date-range" id="chartDateRange">Loading...</div>
+          </div>
+          <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+          </div>
+          <div class="chart-navigation">
+            <button class="nav-btn" onclick="previousPeriod()">◀ Previous</button>
+            <button class="nav-btn" onclick="nextPeriod()">Next ▶</button>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="activity-section">
+          <h2>🕒 Recent Activity</h2>
+          <div class="activity-list" id="activityList">
+            <div class="activity-item">
+              <div class="activity-icon order-icon">🛒</div>
+              <div class="activity-content">
+                <div class="activity-title">Loading activity...</div>
+                <div class="activity-time">Please wait</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Flatpickr JS for Calendar Widget -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="js/adminDashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders Management (Admin)</title>
+  <link rel="stylesheet" href="css/orders.css">
+  <!-- Flatpickr CSS for Calendar Widget -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <!-- Chart.js for Data Visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="admin-header">
+        <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="panda-logo">
+        <span class="admin-title">foodpanda</span>
+      </div>
+      <nav class="nav-menu">
+        <div class="nav-item" onclick="navigateTo('adminDashboard')">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('manageProduct')">
+          <span class="nav-icon">🍔</span>
+          <span>Manage Products</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('viewMembers')">
+          <span class="nav-icon">👥</span>
+          <span>View Members</span>
+        </div>
+        <div class="nav-item active" onclick="navigateTo('orders')">
+          <span class="nav-icon">📦</span>
+          <span>Orders</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('report_admin')">
+          <span class="nav-icon">📈</span>
+          <span>Reports</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('settings_admin')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </div>
+        <div class="nav-item logout" onclick="navigateTo('logout_admin')">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1>Orders Management</h1>
+          <div class="breadcrumb">Admin / Orders / All Orders</div>
+        </div>
+
+        <!-- Enhanced Filter Section with Calendar Widget -->
+        <div class="filter-section">
+          <h2>📅 Filter Orders</h2>
+          <div class="filter-grid-enhanced">
+            <!-- Time Period Filter -->
+            <div class="filter-group">
+              <label>📆 Time Period</label>
+              <select id="timePeriodFilter" onchange="handleTimePeriodChange()">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="this_week">This Week</option>
+                <option value="last_week">Last Week</option>
+                <option value="this_month" selected>This Month</option>
+                <option value="last_month">Last Month</option>
+                <option value="this_year">This Year</option>
+                <option value="last_year">Last Year</option>
+                <option value="custom">Custom Range</option>
+              </select>
+            </div>
+
+            <!-- Calendar Widget for Custom Date Range -->
+            <div class="filter-group" id="customDateGroup" style="display: none;">
+              <label>📆 Select Date Range</label>
+              <input type="text" id="customDateRange" placeholder="Click to select dates" readonly>
+            </div>
+
+            <!-- Year Filter (for statistics) -->
+            <div class="filter-group" id="yearFilterGroup">
+              <label>Year</label>
+              <select id="yearFilter" onchange="filterOrders()">
+                <option value="all">All Years</option>
+                <option value="2025" selected>2025</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+              </select>
+            </div>
+
+            <!-- Month Filter (for statistics) -->
+            <div class="filter-group" id="monthFilterGroup">
+              <label>Month</label>
+              <select id="monthFilter" onchange="filterOrders()">
+                <option value="all">All Months</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+
+            <!-- Order Status -->
+            <div class="filter-group">
+              <label>Order Status</label>
+              <select id="statusFilter" onchange="filterOrders()">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="preparing">Preparing</option>
+                <option value="out-for-delivery">Out for Delivery</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+
+            <!-- Payment Status -->
+            <div class="filter-group">
+              <label>Payment Status</label>
+              <select id="paymentFilter" onchange="filterOrders()">
+                <option value="all">All Payments</option>
+                <option value="paid">Paid</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+              </select>
+            </div>
+
+            <!-- Sort -->
+            <div class="filter-group">
+              <label>Sort By</label>
+              <select id="sortFilter" onchange="filterOrders()">
+                <option value="date-newest">Newest First</option>
+                <option value="date-oldest">Oldest First</option>
+                <option value="amount-high">Amount (High to Low)</option>
+                <option value="amount-low">Amount (Low to High)</option>
+              </select>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="filter-group filter-actions-group">
+              <label>&nbsp;</label>
+              <div class="filter-actions">
+                <button class="btn btn-primary" onclick="filterOrders()">
+                  <span>🔍</span> Apply
+                </button>
+                <button class="btn btn-secondary" onclick="resetFilters()">
+                  <span>🔄</span> Reset
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enhanced Statistics Section -->
+        <div class="stats-section">
+          <h2>📊 Orders Statistics</h2>
+          
+          <!-- Summary Cards -->
+          <div class="stats-grid">
+            <div class="stat-card stat-total">
+              <div class="stat-icon">📦</div>
+              <div class="stat-info">
+                <div class="stat-value" id="totalOrders">0</div>
+                <div class="stat-label">Total Orders</div>
+                <div class="stat-trend" id="totalOrdersTrend">In selected period</div>
+              </div>
+            </div>
+            <div class="stat-card stat-pending">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-info">
+                <div class="stat-value" id="pendingOrders">0</div>
+                <div class="stat-label">Pending Orders</div>
+                <div class="stat-trend" id="pendingOrdersTrend">Need attention</div>
+              </div>
+            </div>
+            <div class="stat-card stat-revenue">
+              <div class="stat-icon">💰</div>
+              <div class="stat-info">
+                <div class="stat-value" id="totalRevenue">RM 0.00</div>
+                <div class="stat-label">Total Revenue</div>
+                <div class="stat-trend" id="revenueTrend">Paid orders only</div>
+              </div>
+            </div>
+            <div class="stat-card stat-average">
+              <div class="stat-icon">📈</div>
+              <div class="stat-info">
+                <div class="stat-value" id="avgOrderValue">RM 0.00</div>
+                <div class="stat-label">Avg Order Value</div>
+                <div class="stat-trend" id="avgOrderTrend">Per transaction</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Section -->
+          <div class="charts-grid">
+            <div class="chart-box">
+              <h3>📊 Revenue Trend</h3>
+              <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-box">
+              <h3>📈 Order Status Distribution</h3>
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Detailed Statistics Table -->
+          <div class="stats-table-container">
+            <div class="table-header">
+              <h3>📋 Monthly Breakdown</h3>
+              <div class="table-actions">
+                <button class="btn btn-secondary btn-sm" onclick="exportStatistics()">
+                  <span>📥</span> Export CSV
+                </button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="stats-table">
+                <thead>
+                  <tr>
+                    <th onclick="sortStatsTable('period')">Period ▼</th>
+                    <th onclick="sortStatsTable('total')">Total Orders ▼</th>
+                    <th onclick="sortStatsTable('completed')">Completed ▼</th>
+                    <th onclick="sortStatsTable('pending')">Pending ▼</th>
+                    <th onclick="sortStatsTable('cancelled')">Cancelled ▼</th>
+                    <th onclick="sortStatsTable('revenue')">Revenue ▼</th>
+                    <th onclick="sortStatsTable('avg')">Avg Order ▼</th>
+                    <th>Growth</th>
+                  </tr>
+                </thead>
+                <tbody id="statsTableBody">
+                  <tr>
+                    <td colspan="8" style="text-align: center; padding: 2rem;">Loading statistics...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="action-bar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by order ID, customer name..." onkeyup="filterOrders()">
+          </div>
+          <div class="action-buttons">
+            <button class="btn btn-info" onclick="exportOrders()">📥 Export</button>
+            <button class="btn btn-primary" onclick="refreshOrders()">🔄 Refresh</button>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="orders-table-section">
+          <div class="table-header">
+            <h2>Order List</h2>
+            <div class="table-info">
+              <span id="orderCount">Showing 0 orders</span>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table id="ordersTable">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total Amount</th>
+                  <th>Payment</th>
+                  <th>Order Status</th>
+                  <th>Date & Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr>
+                  <td colspan="8" style="text-align: center; padding: 2rem;">Loading orders...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- View Order Details Modal -->
+  <div id="orderModal" class="modal">
+    <div class="modal-content modal-large">
+      <div class="modal-header">
+        <h2>Order Details</h2>
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="order-details" id="orderDetailsContent">
+        <!-- Details will be loaded here -->
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Update Status Modal -->
+  <div id="statusModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Update Order Status</h2>
+        <span class="close-modal" onclick="closeStatusModal()">&times;</span>
+      </div>
+      <form id="statusForm" onsubmit="updateOrderStatus(event)">
+        <div class="form-content">
+          <div class="form-group">
+            <label>Order ID</label>
+            <input type="text" id="statusOrderId" readonly>
+          </div>
+          <div class="form-group">
+            <label>Current Status</label>
+            <input type="text" id="currentStatus" readonly>
+          </div>
+          <div class="form-group">
+            <label>New Status *</label>
+            <select id="newStatus" required>
+              <option value="">Select New Status</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="preparing">Preparing</option>
+              <option value="out-for-delivery">Out for Delivery</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Notes (Optional)</label>
+            <textarea id="statusNotes" rows="3" placeholder="Add any notes about this status update..."></textarea>
+          </div>
+        </div>
+        <input type="hidden" id="updateOrderId">
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeStatusModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Flatpickr JS for Calendar Widget -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+  function navigateTo(page) {
+      window.location.href = page + '.html';
+  }
+  </script>
+  <script src="js/orders.js"></script>
+</body>
+</html>

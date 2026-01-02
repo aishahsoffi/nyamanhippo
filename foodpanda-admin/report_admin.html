@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction Reports (Admin)</title>
+  <link rel="stylesheet" href="css/report_admin.css">
+  <!-- Flatpickr CSS for Calendar Widget -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+  <!-- Chart.js for Data Visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="admin-header">
+        <img src="foodpanda-logo.jpg" alt="Foodpanda Logo" class="panda-logo">
+        <span class="admin-title">Admin Panel</span>
+      </div>
+      <nav class="nav-menu">
+        <div class="nav-item" onclick="navigateTo('adminDashboard')">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('manageProduct')">
+          <span class="nav-icon">🍔</span>
+          <span>Manage Products</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('viewMembers')">
+          <span class="nav-icon">👥</span>
+          <span>View Members</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('orders')">
+          <span class="nav-icon">📦</span>
+          <span>Orders</span>
+        </div>
+        <div class="nav-item active" onclick="navigateTo('report_admin')">
+          <span class="nav-icon">📈</span>
+          <span>Reports</span>
+        </div>
+        <div class="nav-item" onclick="navigateTo('settings_admin')">
+          <span class="nav-icon">⚙️</span>
+          <span>Settings</span>
+        </div>
+        <div class="nav-item logout" onclick="navigateTo('logout_admin')">
+          <span class="nav-icon">🚪</span>
+          <span>Logout</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-wrapper">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1>Transaction Reports</h1>
+          <div class="breadcrumb">Admin / Reports / Transaction Report</div>
+        </div>
+
+        <!-- Filter Section with Calendar Widget -->
+        <div class="filter-section">
+          <h2>📅 Generate Report</h2>
+          <div class="filter-grid">
+            <div class="filter-group">
+              <label for="timeFilter">Time Period</label>
+              <select id="timeFilter" onchange="handleTimeFilterChange()">
+                <option value="all">All Time</option>
+                <option value="today">Today</option>
+                <option value="yesterday">Yesterday</option>
+                <option value="this_week">This Week</option>
+                <option value="last_week">Last Week</option>
+                <option value="this_month">This Month</option>
+                <option value="last_month">Last Month</option>
+                <option value="this_year">This Year</option>
+                <option value="custom">Custom Range</option>
+              </select>
+            </div>
+            
+            <!-- Calendar Widget for Date Selection -->
+            <div class="filter-group" id="dateRangeGroup" style="display: none;">
+              <label for="dateRange">📆 Select Date Range</label>
+              <input type="text" id="dateRange" placeholder="Click to select dates" readonly>
+            </div>
+            
+            <div class="filter-group">
+              <label for="status">Filter by Status</label>
+              <select id="status">
+                <option value="all">All Statuses</option>
+                <option value="paid">Paid Only</option>
+                <option value="pending">Pending Only</option>
+                <option value="delivered">Delivered Only</option>
+                <option value="processing">Processing Only</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="viewType">View Type</label>
+              <select id="viewType">
+                <option value="table">Table View</option>
+                <option value="chart">Chart View</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="filter-actions">
+            <button class="btn btn-primary" onclick="generateReport()">
+              <span>📊</span> Generate Report
+            </button>
+            <button class="btn btn-secondary" onclick="resetFilters()">
+              <span>🔄</span> Reset Filters
+            </button>
+            <button class="btn btn-success" onclick="printReport()">
+              <span>🖨️</span> Print Report
+            </button>
+            <button class="btn btn-info" onclick="exportToCSV()">
+              <span>📥</span> Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Report Summary Banner -->
+        <div id="reportSummary" style="display: none;">
+          <div class="section-header">
+            <h2>📋 Report Summary</h2>
+          </div>
+        </div>
+
+        <!-- Enhanced Stats Grid -->
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card stat-revenue">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-value" id="totalRevenue">RM 0.00</div>
+              <div class="stat-sublabel">Combined earnings</div>
+            </div>
+          </div>
+
+          <div class="stat-card stat-orders">
+            <div class="stat-icon">📦</div>
+            <div class="stat-info">
+              <div class="stat-label">Total Orders</div>
+              <div class="stat-value" id="totalOrders">0</div>
+              <div class="stat-sublabel">All transactions</div>
+            </div>
+          </div>
+          
+          <div class="stat-card stat-success">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <div class="stat-label">Completed</div>
+              <div class="stat-value" id="completedTransactions">0</div>
+              <div class="stat-sublabel">Revenue: <span id="completedRevenue">RM 0.00</span></div>
+            </div>
+          </div>
+          
+          <div class="stat-card stat-warning">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-info">
+              <div class="stat-label">Pending</div>
+              <div class="stat-value" id="pendingTransactions">0</div>
+              <div class="stat-sublabel">Amount: <span id="pendingAmount">RM 0.00</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div id="chartsSection" class="charts-section" style="display: none;">
+          <div class="chart-container-wrapper">
+            <div class="chart-box">
+              <h3>📊 Revenue Trend</h3>
+              <canvas id="revenueChart"></canvas>
+            </div>
+            <div class="chart-box">
+              <h3>📈 Order Status Distribution</h3>
+              <canvas id="statusChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed Report Table -->
+        <div class="report-table-section" id="tableSection">
+          <div class="table-header">
+            <h2>Transaction Details</h2>
+            <div class="table-info">
+              <span id="recordCount">Showing 0 records</span>
+            </div>
+          </div>
+          
+          <div class="table-container">
+            <table id="reportTable">
+              <thead>
+                <tr>
+                  <th onclick="sortTable('date')">Date & Time ▼</th>
+                  <th onclick="sortTable('orderId')">Order ID ▼</th>
+                  <th onclick="sortTable('customer')">Customer ▼</th>
+                  <th onclick="sortTable('paymentMethod')">Payment Method ▼</th>
+                  <th onclick="sortTable('amount')">Amount ▼</th>
+                  <th onclick="sortTable('paymentStatus')">Payment Status ▼</th>
+                  <th onclick="sortTable('deliveryStatus')">Delivery Status ▼</th>
+                </tr>
+              </thead>
+              <tbody id="reportTableBody">
+                <tr>
+                  <td colspan="7" style="text-align: center; padding: 2rem; color: #9ca3af;">
+                    Select filters and click "Generate Report" to view transactions
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Flatpickr JS for Calendar Widget -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="js/report_admin.js"></script>
+</body>
+</html>
