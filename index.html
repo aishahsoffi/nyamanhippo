@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodPanda - Order Food Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <img src="foodpanda-logo.jpg" alt="FoodPanda Logo" class="logo-img" onerror="this.style.display='none';">
+                <h1>foodpanda</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="browsing.html">Menu</a>
+                <a href="login.php" id="loginLink">Login</a>
+                <a href="registration.html" id="registerLink">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('hero-food.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div>
+            <h1 class="hero-title">Hungry? Order Food Now!</h1>
+            <p class="hero-subtitle">Your favourite restaurants delivered to your door</p>
+            <div class="hero-search">
+                <input type="text" placeholder="Enter your delivery address" id="heroSearch">
+                <button onclick="window.location.href='browsing.html'">Find Food</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories and Discover More Section -->
+    <div class="main-container">
+        <div class="content-grid">
+            <!-- LEFT SIDE: Categories (2x6 Grid) -->
+            <div class="categories-section">
+                <h2>Your Favourite Cuisines </h2>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="category-burger.jpg" alt="Burgers" onerror="this.parentElement.style.background='linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)'">
+                        </div>
+                        <h3>Burgers</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="category-pizza.jpg" alt="Pizza" onerror="this.parentElement.style.background='linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%)'">
+                        </div>
+                        <h3>Pizza</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="category-asian.jpg" alt="Asian" onerror="this.parentElement.style.background='linear-gradient(135deg, #F093FB 0%, #F5576C 100%)'">
+                        </div>
+                        <h3>Asian</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="category-desserts.jpg" alt="Desserts" onerror="this.parentElement.style.background='linear-gradient(135deg, #FA8BFF 0%, #2BD2FF 100%)'">
+                        </div>
+                        <h3>Desserts</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="category-beverages.jpg" alt="Beverages" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFA8A8 0%, #FCFF00 100%)'">
+                        </div>
+                        <h3>Beverages</h3>
+                    </div>
+                    <div class="category-card">
+                        <div class="category-image">
+                            <img src="category-chineese.jpg" alt="Chinese" onerror="this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'">
+                        </div>
+                        <h3>Chinese food</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: Discover More (Pink Box with 2x3 Grid) -->
+            <div class="discover-section">
+                <h2>Discover More</h2>
+                <div class="discover-grid">
+                    <div class="discover-card">
+                        <img src="logo.zus.jpg" alt="ZUS Coffee" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 2.5rem;\'>â˜•<br><span style=\'font-size: 0.7rem;\'>ZUS</span></div>'">
+                    </div>
+                    <div class="discover-card">
+                        <img src="logo.mcd.jpg" alt="McDonald\'s" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 2.5rem;\'>ðŸ”<br><span style=\'font-size: 0.7rem;\'>McD</span></div>'">
+                    </div>
+                    <div class="discover-card">
+                        <img src="logo.boost.jpg" alt="Boost" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 2.5rem;\'>ðŸ¥¤<br><span style=\'font-size: 0.7rem;\'>Boost</span></div>'">
+                    </div>
+                    <div class="discover-card">
+                        <img src="logo.tealive.jpg" alt="Tealive" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 2.5rem;\'>ðŸµ<br><span style=\'font-size: 0.7rem;\'>Tealive</span></div>'">
+                    </div>
+                    <div class="discover-card">
+                        <img src="logo.chagee.jpg" alt="Chagee" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 2.5rem;\'>ðŸ§‹<br><span style=\'font-size: 0.7rem;\'>Chagee</span></div>'">
+                    </div>
+                    <div class="discover-card">
+                        <img src="logo.gepokbro.jpg" alt="Gepok Bro" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'font-size: 2.5rem;\'>ðŸ——<br><span style=\'font-size: 0.7rem;\'>Gepok</span></div>'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Items Section -->
+    <section class="featured">
+        <div class="featured-container">
+            <h2 class="section-title">Featured Items</h2>
+            <div class="items-grid" id="featuredItems">
+                <!-- Items will be loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 FoodPanda. All rights reserved. | CS-Erudite Group Project</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+            Built with HTML, CSS, JavaScript, Database | TMS3853 Web Application Development
+        </p>
+    </footer>
+
+    <script>
+        // ============================================
+        // Manage data for the index page
+        // ============================================
+        
+        const categories = [
+            { id: 1, name: 'Burgers'},
+            { id: 2, name: 'Pizza'},
+            { id: 3, name: 'Asian'},
+            { id: 4, name: 'Desserts'},
+            { id: 5, name: 'Beverages'},
+            { id: 6, name: 'Breakfast'},
+            { id: 7, name: 'Healthy' }
+        ];
+
+        const items = [
+            { id: 1, name: 'Classic Beef Burger', categoryId: 1, price: 7.90, description: 'Juicy beef patty with lettuce, tomato, and cheese', stock: 50, image: 'item-beef-burger.jpg', restaurantLink: 'unclebob.html' },
+            { id: 2, name: 'Chicken Burger', categoryId: 1, price: 6.90, description: 'Crispy chicken patty with fresh lettuce and special sauce', stock: 45, image: 'item-chicken-burger.jpg', restaurantLink: 'unclebob.html' },
+            { id: 3, name: 'Margherita Pizza', categoryId: 2, price: 25.90, description: 'Classic tomato and mozzarella pizza', stock: 30, image: 'item-margherita-pizza.jpg', restaurantLink: 'pizzaHut.html' },
+            { id: 4, name: 'Pepperoni Pizza', categoryId: 2, price: 22.90, description: 'Loaded with pepperoni slices', stock: 4, image: 'item-pepperoni-pizza.jpg', restaurantLink: 'pizzaHut.html' },
+            { id: 5, name: 'Nasi Lemak', categoryId: 3, price: 4.50, description: 'Traditional Malaysian breakfast', stock: 40, image: 'item-nasi-lemak.jpg', restaurantLink: 'MajuM.html' },
+            { id: 6, name: 'Fried Rice', categoryId: 3, price: 6.00, description: 'Special fried rice with chicken', stock: 38, image: 'item-fried-rice.jpg', restaurantLink: 'MajuM.html' }
+        ];
+
+        // ============================================
+        // AUTHENTICATION FUNCTIONS
+        // ============================================
+        
+        function isLoggedIn() {
+            return sessionStorage.getItem('currentUser') !== null;
+        }
+
+        function getCurrentUser() {
+            const userJson = sessionStorage.getItem('currentUser');
+            return userJson ? JSON.parse(userJson) : null;
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // ============================================
+        // NAVIGATION  TO HIDE LOGIN/REGISTER AFTER USRER LOGGED IN
+        // ============================================
+        
+        function updateNavigation() {
+            const loginLink = document.getElementById('loginLink');
+            const registerLink = document.getElementById('registerLink');
+            
+            if (isLoggedIn()) {
+                // User is LOGGED IN - Hide Login and Register buttons
+                if (loginLink) loginLink.style.display = 'none';
+                if (registerLink) registerLink.style.display = 'none';
+                
+                console.log('User is logged in:', getCurrentUser().fullName);
+            } else {
+                // User is NOT LOGGED IN - Show Login and Register buttons
+                if (loginLink) loginLink.style.display = 'inline-block';
+                if (registerLink) registerLink.style.display = 'inline-block';
+                
+                console.log('User is not logged in');
+            }
+        }
+
+        // ============================================
+        // LOAD FEATURED ITEMS WITH RESTAURANT LINKS
+        // ============================================
+        
+        function loadFeaturedItems() {
+            const itemsGrid = document.getElementById('featuredItems');
+            
+            itemsGrid.innerHTML = items.map(item => {
+                const category = categories.find(cat => cat.id === item.categoryId);
+                return `
+                    <div class="item-card" onclick="window.location.href='${item.restaurantLink}'">
+                        <div class="item-image">
+                            <img src="${item.image}" alt="${item.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=font-size:3.5rem>${item.emoji || 'ðŸ½ï¸'}</span>'">
+                        </div>
+                        <div class="item-info">
+                            <span class="item-category">${category.name}</span>
+                            <h3 class="item-name">${item.name}</h3>
+                            <p class="item-desc">${item.description}</p>
+                            <div class="item-footer">
+                                <span class="item-price">RM ${item.price.toFixed(2)}</span>
+                                <button class="btn-add" onclick="event.stopPropagation(); window.location.href='${item.restaurantLink}'">Order Now</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ============================================
+        // INITIALIZE PAGE
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Run updateNavigation when page loads
+            updateNavigation();
+            loadFeaturedItems();
+            
+            console.log('Page loaded. Checking login status...');
+        });
+    </script>
+</body>
+</html>
