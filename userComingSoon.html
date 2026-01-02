@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | nyamanhippo</title>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <img src="foodpanda-logo.jpg" alt="nyamanhippo" class="logo-img">
+                <h1>nyamanhippo</h1>
+            </div>
+        </div>
+    </nav>
+
+    <main class="coming-soon-container">
+        <div class="coming-soon-content">
+            <div class="icon-container">
+                <i class="fa fa-utensils"></i>
+            </div>
+            <h1>Coming Soon!</h1>
+            <p class="subtitle">This restaurant page is currently under construction.</p>
+            <p class="description">We're working hard to bring you the best dining experience. Check back soon!</p>
+
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fa fa-clock"></i>
+                    <span>Coming Soon</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa fa-star"></i>
+                    <span>New Menu</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa fa-motorcycle"></i>
+                    <span>Fast Delivery</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+}
+
+
+/* Coming Soon Container */
+.coming-soon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 60px);
+    padding: 40px 20px;
+}
+
+.coming-soon-content {
+    background: white;
+    border-radius: 20px;
+    padding: 60px 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.icon-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    background: linear-gradient(135deg, #d70f64 0%, #ff2b85 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(215, 15, 100, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(215, 15, 100, 0);
+    }
+}
+
+.icon-container i {
+    font-size: 50px;
+    color: white;
+}
+
+.coming-soon-content h1 {
+    font-size: 42px;
+    color: #2e2e2e;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #666;
+    margin: 0 0 15px 0;
+    font-weight: 500;
+}
+
+.description {
+    font-size: 16px;
+    color: #888;
+    margin: 0 0 40px 0;
+    line-height: 1.6;
+}
+
+/* Features */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #e9ecef;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-item i {
+    font-size: 28px;
+    color: #d70f64;
+}
+
+.feature-item span {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .coming-soon-content {
+        padding: 40px 30px;
+    }
+
+    .coming-soon-content h1 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    .features {
+        gap: 20px;
+    }
+
+    .feature-item i {
+        font-size: 24px;
+    }
+
+    .feature-item span {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .icon-container i {
+        font-size: 40px;
+    }
+
+    .coming-soon-content h1 {
+        font-size: 28px;
+    }
+}
+</style>

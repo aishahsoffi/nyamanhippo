@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodpanda Review Interface</title>
+    <link rel="stylesheet" href="ratingreview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <img src="foodpanda-logo.jpg" alt="FoodPanda" class="logo-img" onerror="this.style.display='none'">
+                <h1>foodpanda</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="cart.html" style="color: var(--primary-color);">🛒 (3)</a>
+                <a href="dashboard.html" id="navUserName">My Account</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="card order-card">
+            <h3>Order #ORD-2025-1234</h3>
+            <p class="date">Delivered on Nov 2, 2025</p>
+            <hr>
+            <div class="restaurant-info">
+                <img src="auntieanne's.webp" alt="Pretzels" class="food-img">
+                <div class="rating-section">
+                    <h4>Auntie Anne's — KL Sentral</h4>
+                    <div class="stars" id="star-rating">
+                        <i class="fa-regular fa-star" data-value="1"></i>
+                        <i class="fa-regular fa-star" data-value="2"></i>
+                        <i class="fa-regular fa-star" data-value="3"></i>
+                        <i class="fa-regular fa-star" data-value="4"></i>
+                        <i class="fa-regular fa-star" data-value="5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card experience-card">
+            <h3>Share your experience</h3>
+            <p class="label">Write your review (Optional)</p>
+            <textarea id="review-text" placeholder="Tell us what you loved or what could be improved..."></textarea>
+            
+            <div class="button-group">
+                <button class="btn btn-cancel" onclick="cancelReview()">Cancel</button>
+                <button class="btn btn-submit" id="submit-btn">Submit Review</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="ratingreview.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<div class="user-dropdown">
+    <button class="user-profile-btn" id="userDropdownBtn">
+        <span id="navUserAvatar">
+            <i class="fa-regular fa-user"></i>
+        </span>
+        <span id="navUserName">Guest</span>
+        <i class="fa fa-caret-down"></i>
+    </button>
+
+    <div class="dropdown-menu" id="userDropdownMenu">
+        <a href="userProfile.html">
+            <i class="fa fa-user"></i> My Profile
+        </a>
+        <a href="dashboard.html">
+            <i class="fa fa-chart-line"></i> Dashboard
+        </a>
+        <hr>
+        <a href="#" id="logoutBtn">
+            <i class="fa fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+</div>
+<style>
+    /* Navbar Avatar */
+.nav-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #d70f64;
+    font-size: 14px;
+}
+
+.nav-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+</style>
+

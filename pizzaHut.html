@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piizaa Menu | nyamanhippo</title>
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="logo">
+                <img src="foodpanda-logo.jpg" alt="nyamanhippo" class="logo-img">
+                <h1>nyamanhippo</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="browsing.html">Browse</a>
+                <a href="cart.php" class="cart-icon">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="restaurant-banner">
+        <div class="banner-content">
+            <img src="logo.piizaa.jpg" alt="Piizaa Hut Logo" class="restaurant-logo">
+            <div class="restaurant-info">
+                <h1>Piizaa</h1>
+                <p class="cuisine-tags">Italian • Pizza • Fast Food</p>
+                <div class="rating">⭐ 4.5 (300+ ratings)</div>
+            </div>
+        </div>
+    </div>
+
+    <main class="menu-container">
+        <a href="browsing.html" class="back-link"><i class="fa fa-arrow-left"></i> Back to Restaurants</a>
+        
+        <h2 class="section-title">Popular Items</h2>
+        <div class="menu-grid">
+            <!-- Item ID 7: Margherita Pizza -->
+            <div class="menu-card">
+                <div class="menu-info">
+                    <h3>Margherita Pizza</h3>
+                    <p>Regular size pizza with classic tomato and mozzarella.</p>
+                    <span class="price">RM 25.90</span>
+                </div>
+                <div class="menu-right">
+                    <img src="item-margherita-pizza.jpg" alt="Margherita Pizza">
+                    <button class="add-btn" onclick="addToCart('Margherita Pizza', 25.90, 7)">+</button>
+                </div>
+            </div>
+
+            <!-- Item ID 8: Pepperoni Pizza -->
+            <div class="menu-card">
+                <div class="menu-info">
+                    <h3>Pepperoni Pizza</h3>
+                    <p>Regular size pizza loaded with pepperoni slices.</p>
+                    <span class="price">RM 23.90</span>
+                </div>
+                <div class="menu-right">
+                    <img src="item-pepperoni-pizza.jpg" alt="Pepperoni Pizza">
+                    <button class="add-btn" onclick="addToCart('Pepperoni Pizza', 23.90, 8)">+</button>
+                </div>
+            </div>
+
+            <!-- Item ID 9: Hawaiian Pizza -->
+            <div class="menu-card">
+                <div class="menu-info">
+                    <h3>Hawaiian Pizza</h3>
+                    <p>Regular size pizza with ham and pineapple.</p>
+                    <span class="price">RM 29.90</span>
+                </div>
+                <div class="menu-right">
+                    <img src="hawaiianPizza.jpg" alt="Hawaiian Pizza">
+                    <button class="add-btn" onclick="addToCart('Hawaiian Pizza', 29.90, 9)">+</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="restaurant.js"></script>
+</body>
+</html>
+
+<style>
+:root {
+    --pizzaHut-brown: #715a0f;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #d70f64;
+    border: 2px solid white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+}
+
+.cart-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.2s;
+}
+
+
+.restaurant-banner {
+    background: linear-gradient(135deg, var(--pizzaHut-brown) 0%, #715a0f 100%);
+    color: white;
+    padding: 40px 40px 50px;
+}
+
+.banner-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.restaurant-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    border: 4px solid white;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.restaurant-info h1 {
+    font-size: 36px;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.cuisine-tags {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    opacity: 0.95;
+}
+
+.rating {
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.menu-container {
+    padding: 30px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    color: #d70f64;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #b00c50;
+}
+
+.section-title {
+    margin: 0 0 25px 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #2e2e2e;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.menu-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    border-radius: 12px;
+    transition: all 0.2s;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.menu-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+
+.menu-info {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.menu-info h3 {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+    color: #2e2e2e;
+    font-weight: 600;
+}
+
+.menu-info p {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+}
+
+.price {
+    font-weight: 700;
+    color: #d70f64;
+    font-size: 16px;
+}
+
+.menu-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-card img {
+    width: 110px;
+    height: 110px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #f0f0f0;
+}
+
+.add-btn {
+    background-color: #d70f64;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(215, 15, 100, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-btn:hover {
+    background-color: #b00c50;
+    transform: scale(1.05);
+}
+
+.add-btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .restaurant-banner {
+        padding: 30px 20px;
+    }
+
+    .banner-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .restaurant-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .restaurant-info h1 {
+        font-size: 28px;
+    }
+
+    .menu-container {
+        padding: 20px;
+    }
+
+    .menu-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu-info {
+        padding-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .menu-right {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .menu-card img {
+        width: 90px;
+        height: 90px;
+    }
+}
+</style>

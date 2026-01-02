@@ -1,0 +1,325 @@
+:root {
+    --panda-pink: #D70F64;
+    --bg-gray: #f2f2f2;
+    --text-dark: #333;
+    --text-light: #666;
+}
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: var(--bg-gray);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo { 
+    height: 35px; 
+}
+
+.brand-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    font-size: 1.1rem;
+}
+
+.nav-link,
+.user-profile {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link:hover,
+.user-profile:hover {
+    opacity: 0.8;
+}
+
+.nav-link i,
+.user-profile i {
+    font-size: 1.2rem;
+}
+
+/* Main Content: Expanded to 1200px */
+.content {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.card h3 { 
+    font-size: 1.8rem; 
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.date { 
+    font-size: 1rem; 
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+hr { 
+    border: 0; 
+    border-top: 1.5px solid #f0f0f0; 
+    margin: 30px 0; 
+}
+
+/* Restaurant Info Layout */
+.restaurant-info {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.food-img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.rating-section h4 { 
+    font-size: 1.6rem; 
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.stars { 
+    font-size: 3rem;
+    color: #ddd;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+}
+
+.stars i {
+    transition: all 0.2s ease;
+}
+
+.stars i:hover {
+    transform: scale(1.1);
+}
+
+.stars .fa-star.active {
+    color: var(--panda-pink);
+}
+
+/* Form Area */
+.label {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+textarea {
+    width: 100%;
+    height: 250px;
+    border: 1.5px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    resize: vertical;
+    margin: 20px 0 30px 0;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--panda-pink);
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 45px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-cancel { 
+    background: #999; 
+    color: white;
+}
+
+.btn-cancel:hover {
+    background: #777;
+}
+
+.btn-submit { 
+    background: var(--panda-pink); 
+    color: white;
+}
+
+.btn-submit:hover { 
+    opacity: 0.9; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(215, 15, 100, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+        font-size: 1rem;
+    }
+
+    .content {
+        padding: 0 20px;
+    }
+
+    .restaurant-info {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .food-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .stars {
+        font-size: 2rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+.logo { height: 35px; }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    font-size: 1.1rem;
+}
+
+/* Main Content: Expanded to 1200px */
+.content {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px; /* Increased padding */
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.card-header h3 { font-size: 1.8rem; margin: 0; }
+.date { font-size: 1rem; color: var(--text-light); }
+
+hr { border: 0; border-top: 1.5px solid #f0f0f0; margin: 30px 0; }
+
+/* Restaurant Info Layout */
+.restaurant-info {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.food-img {
+    width: 300px; /* Larger image */
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.rating-section h4 { 
+    font-size: 1.6rem; 
+    margin-bottom: 15px; 
+}
+
+.stars { 
+    font-size: 3rem; /* Larger stars for big screens */
+    color: #333; 
+    cursor: pointer; 
+}
+
+.stars .fa-star.active {
+    font-weight: 900;
+    color: var(--panda-pink);
+}
+
+/* Form Area */
+textarea {
+    width: 100%;
+    height: 250px; /* Taller area for feedback */
+    border: 1.5px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    resize: vertical;
+    margin: 20px 0 30px 0;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 45px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.btn-cancel { background: #999; color: white; border: none; }
+.btn-submit { background: var(--panda-pink); color: white; border: none; }
+.btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }

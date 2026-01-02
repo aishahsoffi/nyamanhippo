@@ -1,0 +1,158 @@
+/* ============================================
+   NAVBAR - REUSABLE HEADER STYLES
+   ============================================ */
+
+/* Global Variables */
+:root {
+    --primary-color: #d70f64;
+    --secondary-color: #ff2b85;
+    --dark-color: #2e2e2e;
+    --light-color: #f8f9fa;
+}
+
+/* Reset for navbar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.navbar {
+    background: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 60px;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo h1 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Course Info 0.95 rem*/
+.nav-wrapper::after {
+    content: "TMS3853 | Web Application Development";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem 1rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* Course Info Styling */
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: opacity 0.3s;
+    border: none;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+/* ============================================
+   RESPONSIVE NAVBAR
+   ============================================ */
+
+@media (max-width: 768px) {
+    .nav-wrapper {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .logo h1 {
+        font-size: 1.3rem;
+    }
+
+    .nav-wrapper::after {
+        display: none;
+    }
+
+    .logo-img {
+        height: 40px;
+        width: auto;
+    }
+
+    .course-info {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 0.7rem;
+        flex-wrap: wrap;
+        font-size: 0.8rem;
+    }
+
+    .logo h1 {
+        font-size: 1.2rem;
+    }
+
+    .logo-img {
+        height: 30px;
+    }
+
+    .course-info {
+        display: none;
+    }
+}
