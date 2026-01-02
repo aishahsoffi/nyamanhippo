@@ -7,10 +7,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database configuration
-$host = 'localhost';
-$dbname = 'foodpanda_db';
-$username = 'root';
-$password = '';
+$host = "sql308.infinityfree.com";
+$dbname = "if0_40808483_nyamanhippo_db";
+$username = "if0_40808483";
+$password = "fpanda345";
 
 $pdo = null;
 $db_error = false;
